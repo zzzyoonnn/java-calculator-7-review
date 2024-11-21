@@ -44,6 +44,40 @@
 ````
 
 ## 기능 구현 목록
+- getUserInput
+  - 문자열을 입력받는다.
+- startsWithCustomDelimiter
+  - 커스텀 구분자로 시작하는지 확인한다.
+- endsWithCustomDelimiter(CustomDelimiter)
+  - 커스텀 구분자로 종료하는지 확인한다.
+- isValidCustomDelimiter(CustomDelimiter)
+  - 커스텀 구분자가 적절한 문자인지 확인한다.
+- isEmpty(CustomDelimiter)
+  - 커스텀 구분자가 공백인지 확인한다.
+- isNumeric(CustomDelimiter)
+  - 커스텀 구분자가 숫자인지 확인한다.
+- isDefaultDelimiter(CustomDelimiter)
+  - 커스텀 구분자가 기본 구분자와 동일한지 확인한다.
+- setCustomDelimiter(CustomDelimiter)
+  - 커스텀 구분자를 저장한다.
+- processDelimitersAndInput
+  - 구분자와 문자열을 처리한다.
+- splitUserInput
+  - 구분자를 기준으로 문자열 분리한다.
+- isEmpty(Words)
+  - 구분자를 기준으로 잘려진 문자열이 공백 문자열인지 확인한다.
+- isNumeric(Words)
+  - 구분자를 기준으로 잘려진 문자열이 숫자 문자열인지 확인한다.
+- addNumberWord(Words)
+  - numbers에 추가한다.
+- isIntRange
+  - numbers의 숫자가 int 범위 안에 속하는지 확인한다.
+- isResultWithinIntRange
+  - 현재까지의 계산 결과가 int 범위 안에 속하는지 확인한다.
+- storeSumResult
+  - 덧셈를 결과 저장한다.
+- displaySumResult
+  - 덧셈 결과를 출력한다.
 
 ## 로직
 
