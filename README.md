@@ -48,3 +48,4 @@
 ## 로직
 
 ## 순서도
+<img width = "500" alt = "image" src="./image/flowchart.jpg">
