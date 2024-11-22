@@ -19,6 +19,10 @@ public class User {
         userInput = getUserInput();
     }
 
+    private boolean startsWithCustomDelimiter() {
+        return userInput.startsWith("\\\\");
+    }
+
     private String getUserInput() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -27,5 +31,9 @@ public class User {
 
     public String getUserInputValue() {
         return userInput;
+    }
+
+    public boolean isCustomDelimiter() {
+        return startsWithCustomDelimiter();
     }
 }
