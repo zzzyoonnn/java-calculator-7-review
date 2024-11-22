@@ -23,7 +23,7 @@ public class CustomDelimiterTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"///abc\n1234", "//1234\nabc", "////~!@#\n"})
+    @ValueSource(strings = {"///abc\\n1234", "//1234\\nabc", "////~!@#\\n"})
     @DisplayName("커스텀 구분자의 닫는 문자가 존재한다.")
     public void testStartsWithCustomDelimiter(String input) {
         CustomDelimiter customDelimiter = new CustomDelimiter(input);

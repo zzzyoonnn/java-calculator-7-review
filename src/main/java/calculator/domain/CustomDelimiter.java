@@ -47,7 +47,7 @@ public class CustomDelimiter {
 
 
     private boolean endsWithCustomDelimiter() {
-        return customString.contains("\n");
+        return customString.contains("\\n");
     }
 
     public boolean hasEndsWithCustomDelimiter() {
