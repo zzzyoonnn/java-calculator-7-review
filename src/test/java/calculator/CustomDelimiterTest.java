@@ -41,7 +41,7 @@ public class CustomDelimiterTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"//\\n1", "//\\nabc", "//\\n,"})
+    @ValueSource(strings = {"//\\n1", "//\\nabc", "//\\n"})
     @DisplayName("커스텀 구분자가 빈 문자열이라면 에러를 발생시킨다.")
     public void testIsEmpty(String userInput) {
         CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
@@ -92,5 +92,23 @@ public class CustomDelimiterTest {
         CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
 
         assertDoesNotThrow(() -> customDelimiter.isDefaultDelimiter(customDelimiter.getCustomDelimiter()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//\\n", "//123\\n123", "//,\\n1", "//:\\nabc"})
+    @DisplayName("커스텀 구분자가 적절한 구분자가 아니라면 에러를 발생시킨다.")
+    public void testIsValidCustomDelimiter(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+
+        assertThrows(IllegalArgumentException.class, () -> customDelimiter.isValidCustomDelimiter(customDelimiter.getCustomDelimiter()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"///abc\\n1234", "//1a2b3c\\nabc", "//,,\\n123", "//,:\\n123,"})
+    @DisplayName("커스텀 구분자가 적절한 구분자라면 에러를 발생시키지 않는다.")
+    public void testIsNotValidCustomDelimiter(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+
+        assertDoesNotThrow(() -> customDelimiter.isValidCustomDelimiter(customDelimiter.getCustomDelimiter()));
     }
 }
