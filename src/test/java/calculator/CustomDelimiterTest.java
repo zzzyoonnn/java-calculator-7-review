@@ -2,6 +2,7 @@ package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import calculator.domain.CustomDelimiter;
@@ -30,11 +31,20 @@ public class CustomDelimiterTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"///abc\\n1234, /abc", "//1234\\nabc, 1234", "//\\n123, ", "//.\\n, ."})
-    @DisplayName("입력 값에 따라 결과 값이 다른 경우에 대한 테스트도 가능지를 확인하는 학습 테스트")
+    @CsvSource(value = {"///abc\\n1234, /abc", "//1234\\nabc, 1234", "//1\\n123, 1", "//.\\n, ."})
+    @DisplayName("커스텀 구분자를 추출할 수 있다.")
     public void testSetVariousValue(String userInput, String expectedOutput) {
         CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
 
         assertThat(customDelimiter.getCustomDelimiter()).isEqualTo(expectedOutput);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//\\n1", "//\\nabc", "//\\n,"})
+    @DisplayName("커스텀 구분자가 빈 문자열이라면 에러를 발생시킨다.")
+    public void testIsEmpty(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+
+        assertThrows(IllegalArgumentException.class, () -> customDelimiter.isBlank(customDelimiter.getCustomDelimiter()));
     }
 }
