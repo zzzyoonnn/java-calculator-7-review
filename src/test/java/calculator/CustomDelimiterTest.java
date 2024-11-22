@@ -75,4 +75,22 @@ public class CustomDelimiterTest {
 
         assertDoesNotThrow(() -> customDelimiter.isNumeric(customDelimiter.getCustomDelimiter()));
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//,\\n1", "//:\\nabc"})
+    @DisplayName("커스텀 구분자가 기본 구분자와 동일하다면 에러를 발생시킨다.")
+    public void testIsDefaultDelimiter(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+
+        assertThrows(IllegalArgumentException.class, () -> customDelimiter.isDefaultDelimiter(customDelimiter.getCustomDelimiter()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"///abc\\n1234", "//1a2b3c\\nabc", "//,,\\n123", "//,:\\n123,"})
+    @DisplayName("커스텀 구분자가 기본 구분자와 동일하지 않다면 에러를 발생시키지 않는다.")
+    public void testIsNotDefaultDelimiter(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+
+        assertDoesNotThrow(() -> customDelimiter.isDefaultDelimiter(customDelimiter.getCustomDelimiter()));
+    }
 }
