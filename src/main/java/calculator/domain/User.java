@@ -20,7 +20,7 @@ public class User {
     }
 
     private boolean startsWithCustomDelimiter() {
-        return userInput.startsWith("\\\\");
+        return userInput.startsWith("//");
     }
 
     private String getUserInput() throws IOException {
