@@ -52,12 +52,12 @@
   - 커스텀 구분자로 시작하는지 확인한다.
 - endsWithCustomDelimiter(CustomDelimiter)
   - 커스텀 구분자로 종료하는지 확인한다.
-- extractCustomDelimiter
+- extractCustomDelimiter(CustomDelimiter)
   - 커스텀 구분자를 추출한다.
 - isValidCustomDelimiter(CustomDelimiter)
   - 커스텀 구분자가 적절한 문자인지 확인한다.
-- isEmpty(CustomDelimiter)
-  - 커스텀 구분자가 공백인지 확인한다.
+- isBlank(CustomDelimiter)
+  - 커스텀 구분자가 ""인지 확인한다.
 - isNumeric(CustomDelimiter)
   - 커스텀 구분자가 숫자인지 확인한다.
 - isDefaultDelimiter(CustomDelimiter)
