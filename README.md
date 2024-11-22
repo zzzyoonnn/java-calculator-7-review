@@ -44,6 +44,8 @@
 ````
 
 ## 기능 구현 목록
+- displayRequestUserInput
+  - 문자열 입력을 요청하는 메시지를 출력한다.
 - getUserInput
   - 문자열을 입력받는다.
 - startsWithCustomDelimiter
