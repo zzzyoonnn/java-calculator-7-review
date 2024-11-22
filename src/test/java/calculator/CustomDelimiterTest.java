@@ -1,6 +1,7 @@
 package calculator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -46,5 +47,32 @@ public class CustomDelimiterTest {
         CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
 
         assertThrows(IllegalArgumentException.class, () -> customDelimiter.isBlank(customDelimiter.getCustomDelimiter()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"///abc\\n1234", "//1234\\nabc", "//1\\n123,"})
+    @DisplayName("커스텀 구분자가 빈 문자열이 아니라면 에러를 발생시키지 않는다.")
+    public void testIsNotEmpty(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+
+        assertDoesNotThrow(() -> customDelimiter.isBlank(customDelimiter.getCustomDelimiter()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"//123\\n1", "//1122\\nabc", "//0\\n,"})
+    @DisplayName("커스텀 구분자가 숫자라면 에러를 발생시킨다.")
+    public void testIsNumeric(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+
+        assertThrows(IllegalArgumentException.class, () -> customDelimiter.isNumeric(customDelimiter.getCustomDelimiter()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"///abc\\n1234", "//1a2b3c\\nabc", "//!a1\\n123,"})
+    @DisplayName("커스텀 구분자가 숫자가 아니라면 에러를 발생시키지 않는다.")
+    public void testIsNotNumeric(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+
+        assertDoesNotThrow(() -> customDelimiter.isNumeric(customDelimiter.getCustomDelimiter()));
     }
 }
