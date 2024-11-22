@@ -11,7 +11,7 @@ public class User {
         run();
     }
 
-    private User(String userInput) {
+    public User(String userInput) {
         this.userInput = userInput;
     }
 
@@ -25,5 +25,7 @@ public class User {
         return br.readLine();
     }
 
-
+    public String getUserInputValue() {
+        return userInput;
+    }
 }
