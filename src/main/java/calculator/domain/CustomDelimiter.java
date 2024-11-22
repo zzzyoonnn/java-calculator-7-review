@@ -23,6 +23,12 @@ public class CustomDelimiter {
         return customString.substring(startIndex, endIndex);
     }
 
+    public void isDefaultDelimiter(String customDelimiter) {
+        if (customDelimiter.equals(",") || customDelimiter.equals(":")) {
+            throw new IllegalArgumentException(CustomDelimiterErrorMessage.IS_DEFAULT_DELIMITER.getMessage());
+        }
+    }
+
     public void isNumeric(String customDelimiter) {
         if (pattern.matcher(customDelimiter).matches()) {
             throw new IllegalArgumentException(CustomDelimiterErrorMessage.IS_NUMBER.getFormattedMessage());
