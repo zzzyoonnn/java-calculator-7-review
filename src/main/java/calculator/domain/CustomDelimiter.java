@@ -28,19 +28,19 @@ public class CustomDelimiter {
         return customDelimiter;
     }
 
-    public void isDefaultDelimiter(String customDelimiter) {
+    private void isDefaultDelimiter(String customDelimiter) {
         if (customDelimiter.equals(",") || customDelimiter.equals(":")) {
             throw new IllegalArgumentException(CustomDelimiterErrorMessage.IS_DEFAULT_DELIMITER.getMessage());
         }
     }
 
-    public void isNumeric(String customDelimiter) {
+    private void isNumeric(String customDelimiter) {
         if (pattern.matcher(customDelimiter).matches()) {
             throw new IllegalArgumentException(CustomDelimiterErrorMessage.IS_NUMBER.getFormattedMessage());
         }
     }
 
-    public void isBlank(String customDelimiter) {
+    private void isBlank(String customDelimiter) {
         if (customDelimiter.isBlank()) {
             throw new IllegalArgumentException(CustomDelimiterErrorMessage.IS_BLANK.getFormattedMessage());
         }
