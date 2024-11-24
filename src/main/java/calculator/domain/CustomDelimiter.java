@@ -5,7 +5,7 @@ import calculator.message.CustomDelimiterErrorMessage;
 import java.util.regex.Pattern;
 
 public class CustomDelimiter {
-    private String customString;
+    private final String customString;
     private static final String REGEX = "[0-9]+";
     private static final Pattern pattern = Pattern.compile(REGEX);
 
@@ -13,11 +13,11 @@ public class CustomDelimiter {
         this.customString = customString;
     }
 
-    private String extractCustomDelimiter(String customString) {
-        int startIndex = 2;
-        int endIndex = customString.lastIndexOf("\\n");
+    public String getValidCustomDelimiter() {
+        String customDelimiter = extractCustomDelimiter(customString);
+        isValidCustomDelimiter(customDelimiter);
 
-        return customString.substring(startIndex, endIndex);
+        return customDelimiter;
     }
 
     public String isValidCustomDelimiter(String customDelimiter) {
@@ -27,6 +27,14 @@ public class CustomDelimiter {
 
         return customDelimiter;
     }
+
+    private String extractCustomDelimiter(String customString) {
+        int startIndex = 2;
+        int endIndex = customString.lastIndexOf("\\n");
+
+        return customString.substring(startIndex, endIndex);
+    }
+
 
     private void isDefaultDelimiter(String customDelimiter) {
         if (customDelimiter.equals(",") || customDelimiter.equals(":")) {

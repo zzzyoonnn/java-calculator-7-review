@@ -16,10 +16,18 @@ public class User {
     }
 
     private void run() throws IOException {
-        userInput = getUserInput();
+        String userInput = getUserInput();
+
+        String customDelimiterValue = "";
+        if (startsWithCustomDelimiter(userInput)) {
+            CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+            customDelimiterValue = customDelimiter.getValidCustomDelimiter();
+        }
+
+        System.out.println(customDelimiterValue);
     }
 
-    private boolean startsWithCustomDelimiter() {
+    private boolean startsWithCustomDelimiter(String userInput) {
         return userInput.startsWith("//");
     }
 
@@ -34,6 +42,7 @@ public class User {
     }
 
     public boolean isCustomDelimiter() {
-        return startsWithCustomDelimiter();
+        String userInput = getUserInputValue();
+        return startsWithCustomDelimiter(userInput);
     }
 }
