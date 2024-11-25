@@ -64,6 +64,8 @@
   - 커스텀 구분자가 기본 구분자와 동일한지 확인한다.
 - setCustomDelimiter(CustomDelimiter)
   - 커스텀 구분자를 저장한다.
+- hasCustomDelimiter
+  - 커스텀 구분자를 보유하고 있는지 확인한다.
 - processDelimitersAndInput
   - 구분자와 문자열을 처리한다.
 - splitUserInput
