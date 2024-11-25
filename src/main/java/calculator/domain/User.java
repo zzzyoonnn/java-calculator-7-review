@@ -8,14 +8,14 @@ public class User {
     private String userInput;
 
     public User() throws IOException {
-        run();
+        startUserInput();
     }
 
     public User(String userInput) {
         this.userInput = userInput;
     }
 
-    private void run() throws IOException {
+    private void startUserInput() throws IOException {
         String userInput = getUserInput();
 
         String customDelimiterValue = "";
