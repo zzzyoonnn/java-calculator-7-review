@@ -15,7 +15,13 @@ public class User {
         this.userInput = userInput;
     }
 
-    private void startUserInput() throws IOException {
+    public boolean hasCustomDelimiter() throws IOException {
+        String customDelimiter = startUserInput();
+
+        return !customDelimiter.isEmpty();
+    }
+
+    private String startUserInput() throws IOException {
         String userInput = getUserInput();
 
         String customDelimiterValue = "";
@@ -24,7 +30,7 @@ public class User {
             customDelimiterValue = customDelimiter.getValidCustomDelimiter();
         }
 
-        System.out.println(customDelimiterValue);
+        return customDelimiterValue;
     }
 
     private boolean startsWithCustomDelimiter(String userInput) {
