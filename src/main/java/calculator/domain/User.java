@@ -16,17 +16,21 @@ public class User {
     }
 
     public boolean hasCustomDelimiter() throws IOException {
-        String customDelimiter = startUserInput();
+        String customDelimiter = getCustomDelimiter();
 
         return !customDelimiter.isEmpty();
     }
 
+    public String getCustomDelimiter() throws IOException {
+        return startUserInput();
+    }
+
     private String startUserInput() throws IOException {
-        String userInput = getUserInput();
+        String input = (userInput != null) ? userInput : getUserInput();
 
         String customDelimiterValue = "";
-        if (startsWithCustomDelimiter(userInput)) {
-            CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+        if (startsWithCustomDelimiter(input)) {
+            CustomDelimiter customDelimiter = new CustomDelimiter(input);
             customDelimiterValue = customDelimiter.getValidCustomDelimiter();
         }
 
