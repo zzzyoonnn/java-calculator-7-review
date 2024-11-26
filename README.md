@@ -48,8 +48,8 @@
   - 문자열 입력을 요청하는 메시지를 출력한다.
 - getUserInput
   - 문자열을 입력받는다.
-- separateUserInput
-  - 문자열을 분리하는 작업을 시작한다.
+- processUserInput
+  - 문자열을 처리하는 작업을 시작한다.
 - startsWithCustomDelimiter
   - 커스텀 구분자로 시작하는지 확인한다.
 - endsWithCustomDelimiter(CustomDelimiter)
