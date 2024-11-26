@@ -66,8 +66,6 @@
   - 커스텀 구분자를 저장한다.
 - hasCustomDelimiter
   - 커스텀 구분자를 보유하고 있는지 확인한다.
-- processDelimitersAndInput
-  - 구분자와 문자열을 처리한다.
 - splitUserInput
   - 구분자를 기준으로 문자열 분리한다.
 - isEmpty(Words)
