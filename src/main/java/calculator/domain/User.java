@@ -8,7 +8,8 @@ public class User {
     private String userInput;
 
     public User() throws IOException {
-        startUserInput();
+        getUserInput();
+        processUserInput();
     }
 
     public User(String userInput) {
@@ -16,25 +17,28 @@ public class User {
     }
 
     public boolean hasCustomDelimiter() throws IOException {
-        String customDelimiter = getCustomDelimiter();
+        String userInput = getUserInputValue();
 
-        return !customDelimiter.isEmpty();
+        return !getCustomDelimiter(userInput).isEmpty();
     }
 
-    public String getCustomDelimiter() throws IOException {
-        return startUserInput();
-    }
-
-    private String startUserInput() throws IOException {
-        String input = (userInput != null) ? userInput : getUserInput();
-
-        String customDelimiterValue = "";
-        if (startsWithCustomDelimiter(input)) {
-            CustomDelimiter customDelimiter = new CustomDelimiter(input);
-            customDelimiterValue = customDelimiter.getValidCustomDelimiter();
+    public String getCustomDelimiter(String userInput) throws IOException {
+        if (startsWithCustomDelimiter(userInput)) {
+            return fingCustomDelimiter(userInput);
         }
+        return "";
+    }
 
-        return customDelimiterValue;
+
+    private String fingCustomDelimiter(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+        return customDelimiter.getValidCustomDelimiter();
+    }
+
+    private void processUserInput() throws IOException {
+        String input = getUserInputValue();
+
+        getCustomDelimiter(input);
     }
 
     private boolean startsWithCustomDelimiter(String userInput) {
