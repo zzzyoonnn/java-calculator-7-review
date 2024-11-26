@@ -3,6 +3,7 @@ package calculator.domain;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class User {
     private String userInput;
@@ -16,15 +17,22 @@ public class User {
         this.userInput = userInput;
     }
 
-    public boolean hasCustomDelimiter() throws IOException {
+    private String[] splitUserInput(String userInput) throws IOException {
+        String customDelimiter = getCustomDelimiter(userInput);
+        String regex = ",|:" + customDelimiter;
+
+        return userInput.split(regex);
+    }
+
+    public boolean hasCustomDelimiter() {
         String userInput = getUserInputValue();
 
         return !getCustomDelimiter(userInput).isEmpty();
     }
 
-    public String getCustomDelimiter(String userInput) throws IOException {
+    public String getCustomDelimiter(String userInput) {
         if (startsWithCustomDelimiter(userInput)) {
-            return fingCustomDelimiter(userInput);
+                return fingCustomDelimiter(userInput);
         }
         return "";
     }
@@ -39,16 +47,17 @@ public class User {
         String input = getUserInputValue();
 
         getCustomDelimiter(input);
+        String[] result = splitUserInput(input);
     }
 
     private boolean startsWithCustomDelimiter(String userInput) {
         return userInput.startsWith("//");
     }
 
-    private String getUserInput() throws IOException {
+    private void getUserInput() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        return br.readLine();
+        userInput = br.readLine();
     }
 
     public String getUserInputValue() {
