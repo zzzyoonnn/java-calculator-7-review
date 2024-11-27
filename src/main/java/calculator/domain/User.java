@@ -10,44 +10,67 @@ public class User {
 
     public User() throws IOException {
         getUserInput();
-        processUserInput();
+//        String[] result = processUserInput();
+//        System.out.println(Arrays.toString(result));
     }
 
     public User(String userInput) {
         this.userInput = userInput;
+        //String[] result = processUserInput();
+        //System.out.println(Arrays.toString(result));
     }
 
-    private String[] splitUserInput(String userInput) throws IOException {
-        String customDelimiter = getCustomDelimiter(userInput);
-        String regex = ",|:" + customDelimiter;
+    private String[] splitUserInput(String userInput, String userInputDelimiter) {
+        String regex = ",|:";
+
+        if (!userInputDelimiter.isEmpty()) regex += "|" + userInputDelimiter;
+
+//        if (isCustomDelimiterFound) {
+//            regex += "|" + userInputDelimiter;
+//        }
 
         return userInput.split(regex);
     }
 
-    public boolean hasCustomDelimiter() {
+//    public String hasCustomDelimiter(String userInput, String userCustomDelimiter) {
+//        if (!userCustomDelimiter.isEmpty()) {
+//            int endIndex = userInput.lastIndexOf("\\n");
+//            userInput = userInput.substring(endIndex + 2);
+//            System.out.println(userInput);
+//        }
+//        return userInput;
+//    }
+
+//    private String getCustomDelimiter(String userInput) {
+//        if (findCustomDelimiter(userInput)) {
+//            CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+//            return customDelimiter.getCustomDelimiter();
+//        }
+//        return null;
+//    }
+//
+//
+//    private boolean findCustomDelimiter(String userInput) {
+//        int endIndex = userInput.lastIndexOf("\\n");
+//
+//        return endIndex != -1;
+//    }
+
+    public String[] processUserInput() {
         String userInput = getUserInputValue();
 
-        return !getCustomDelimiter(userInput).isEmpty();
-    }
-
-    public String getCustomDelimiter(String userInput) {
+        String userCustomDelimiter = "";
         if (startsWithCustomDelimiter(userInput)) {
-                return fingCustomDelimiter(userInput);
+            int endIndex = userInput.lastIndexOf("\\n");
+
+            if (endIndex != -1) {
+                userCustomDelimiter = userInput.substring(2, endIndex);
+                userInput = userInput.substring(endIndex + 2);
+            }
         }
-        return "";
-    }
 
-
-    private String fingCustomDelimiter(String userInput) {
-        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
-        return customDelimiter.getValidCustomDelimiter();
-    }
-
-    private void processUserInput() throws IOException {
-        String input = getUserInputValue();
-
-        getCustomDelimiter(input);
-        String[] result = splitUserInput(input);
+        System.out.println(userCustomDelimiter);
+        return splitUserInput(userInput, userCustomDelimiter);
     }
 
     private boolean startsWithCustomDelimiter(String userInput) {
@@ -58,6 +81,7 @@ public class User {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         userInput = br.readLine();
+        processUserInput();
     }
 
     public String getUserInputValue() {
