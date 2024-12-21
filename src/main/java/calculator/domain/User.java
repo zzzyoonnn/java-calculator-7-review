@@ -32,6 +32,10 @@ public class User {
         return userInput.split(regex);
     }
 
+//    public void words(String[] arr) {
+//
+//    }
+
 //    public String hasCustomDelimiter(String userInput, String userCustomDelimiter) {
 //        if (!userCustomDelimiter.isEmpty()) {
 //            int endIndex = userInput.lastIndexOf("\\n");
@@ -69,8 +73,15 @@ public class User {
             }
         }
 
-        System.out.println(userCustomDelimiter);
         return splitUserInput(userInput, userCustomDelimiter);
+//        String[] arr = splitUserInput(userInput, userCustomDelimiter);
+//        for (int index = 0; index < arr.length; index++) {
+//            if (arr[index].isEmpty()) {
+//                arr[index] = "0";
+//                continue;
+//            }
+//            // 숫자 문자열인가?
+//        }
     }
 
     private boolean startsWithCustomDelimiter(String userInput) {
@@ -81,7 +92,14 @@ public class User {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         userInput = br.readLine();
-        processUserInput();
+        String[] splitString = processUserInput();
+
+        // isEmptyString?
+        for (String str : splitString) {
+            if (str.isEmpty()) {
+                str = "0";
+            }
+        }
     }
 
     public String getUserInputValue() {
