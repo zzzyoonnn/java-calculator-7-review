@@ -63,25 +63,14 @@ public class User {
     public String[] processUserInput() {
         String userInput = getUserInputValue();
 
+        CustomDelimiter customDelimiter = new CustomDelimiter();
         String userCustomDelimiter = "";
         if (startsWithCustomDelimiter(userInput)) {
-            int endIndex = userInput.lastIndexOf("\\n");
-
-            if (endIndex != -1) {
-                userCustomDelimiter = userInput.substring(2, endIndex);
-                userInput = userInput.substring(endIndex + 2);
-            }
+            customDelimiter.setCustomString(userInput);
+            userCustomDelimiter = customDelimiter.getValidCustomDelimiter();
         }
 
         return splitUserInput(userInput, userCustomDelimiter);
-//        String[] arr = splitUserInput(userInput, userCustomDelimiter);
-//        for (int index = 0; index < arr.length; index++) {
-//            if (arr[index].isEmpty()) {
-//                arr[index] = "0";
-//                continue;
-//            }
-//            // 숫자 문자열인가?
-//        }
     }
 
     private boolean startsWithCustomDelimiter(String userInput) {
@@ -96,6 +85,7 @@ public class User {
 
         // isEmptyString?
         for (String str : splitString) {
+            System.out.println(str);
             if (str.isEmpty()) {
                 str = "0";
             }

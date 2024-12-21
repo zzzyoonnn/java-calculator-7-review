@@ -16,26 +16,30 @@ public class CustomDelimiterTest {
     @ParameterizedTest
     @ValueSource(strings = {"abc\\", "1234n", "~!@#"})
     @DisplayName("커스텀 구분자의 닫는 문자가 존재하지 않는다.")
-    public void testNotStartsWithCustomDelimiter(String input) {
-        CustomDelimiter customDelimiter = new CustomDelimiter(input);
+    public void testNotStartsWithCustomDelimiter(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter();
+        customDelimiter.setCustomString(userInput);
 
-        assertFalse(customDelimiter.hasEndsWithCustomDelimiter(), input);
+        assertFalse(customDelimiter.hasEndsWithCustomDelimiter(), userInput);
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"///abc\\n1234", "//1234\\nabc", "////~!@#\\n"})
     @DisplayName("커스텀 구분자의 닫는 문자가 존재한다.")
-    public void testStartsWithCustomDelimiter(String input) {
-        CustomDelimiter customDelimiter = new CustomDelimiter(input);
+    public void testStartsWithCustomDelimiter(String userInput) {
+        CustomDelimiter customDelimiter = new CustomDelimiter();
+        customDelimiter.setCustomString(userInput);
 
-        assertTrue(customDelimiter.hasEndsWithCustomDelimiter(), input);
+        assertTrue(customDelimiter.hasEndsWithCustomDelimiter(), userInput);
     }
 
     @ParameterizedTest
     @CsvSource(value = {"///abc\\n1234, /abc", "//1234\\nabc, 1234", "//1\\n123, 1", "//.\\n, ."})
     @DisplayName("커스텀 구분자를 추출할 수 있다.")
     public void testSetVariousValue(String userInput, String expectedOutput) {
-        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+        CustomDelimiter customDelimiter = new CustomDelimiter();
+        customDelimiter.setCustomString(userInput);
+        customDelimiter.hasEndsWithCustomDelimiter();
 
         assertThat(customDelimiter.getCustomDelimiter()).isEqualTo(expectedOutput);
     }
@@ -44,7 +48,9 @@ public class CustomDelimiterTest {
     @ValueSource(strings = {"//\\n", "//123\\n123", "//,\\n1", "//:\\nabc"})
     @DisplayName("커스텀 구분자가 적절한 구분자가 아니라면 에러를 발생시킨다.")
     public void testIsValidCustomDelimiter(String userInput) {
-        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+        CustomDelimiter customDelimiter = new CustomDelimiter();
+        customDelimiter.setCustomString(userInput);
+        customDelimiter.hasEndsWithCustomDelimiter();
 
         assertThrows(IllegalArgumentException.class, () -> customDelimiter.isValidCustomDelimiter(customDelimiter.getCustomDelimiter()));
     }
@@ -53,7 +59,9 @@ public class CustomDelimiterTest {
     @ValueSource(strings = {"///abc\\n1234", "//1a2b3c\\nabc", "//,,\\n123", "//,:\\n123,"})
     @DisplayName("커스텀 구분자가 적절한 구분자라면 에러를 발생시키지 않는다.")
     public void testIsNotValidCustomDelimiter(String userInput) {
-        CustomDelimiter customDelimiter = new CustomDelimiter(userInput);
+        CustomDelimiter customDelimiter = new CustomDelimiter();
+        customDelimiter.setCustomString(userInput);
+        customDelimiter.hasEndsWithCustomDelimiter();
 
         assertDoesNotThrow(() -> customDelimiter.isValidCustomDelimiter(customDelimiter.getCustomDelimiter()));
     }

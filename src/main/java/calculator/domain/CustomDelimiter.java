@@ -1,15 +1,14 @@
 package calculator.domain;
 
-
 import calculator.message.CustomDelimiterErrorMessage;
 import java.util.regex.Pattern;
 
 public class CustomDelimiter {
-    private final String customString;
+    private String customString;
     private static final String REGEX = "[0-9]+";
     private static final Pattern pattern = Pattern.compile(REGEX);
 
-    public CustomDelimiter(String customString) {
+    public void setCustomString(String customString) {
         this.customString = customString;
     }
 
@@ -35,7 +34,6 @@ public class CustomDelimiter {
         return customString.substring(startIndex, endIndex);
     }
 
-
     private void isDefaultDelimiter(String customDelimiter) {
         if (customDelimiter.equals(",") || customDelimiter.equals(":")) {
             throw new IllegalArgumentException(CustomDelimiterErrorMessage.IS_DEFAULT_DELIMITER.getMessage());
@@ -57,7 +55,6 @@ public class CustomDelimiter {
     public String getCustomDelimiter() {
         return extractCustomDelimiter(customString);
     }
-
 
     private boolean endsWithCustomDelimiter() {
         return customString.contains("\\n");
